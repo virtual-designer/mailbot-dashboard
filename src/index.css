@@ -1,13 +1,80 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { 
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.navbar {
+    background: linear-gradient(to left, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.2));
+}
+
+@media screen and (max-width: 970px) {
+    .desktop {
+        display: none;
+    }
+
+    .navbar ul {
+        background: #fff;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.3);
+        height: 100vh;
+        width: 85vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-y: scroll;
+    }
+    
+    .navbar ul li {
+        display: block;
+        padding: 10px;
+    }
+    
+    .navbar ul li:hover a {
+        color: #007bff
+    }
+
+    .navbar ul li:hover {
+        background: rgb(244, 244, 244);
+    }
+
+    .navbar ul li a {
+        color: #000;
+    }
+
+    .navbar .toggler {
+        background: #eee;
+    }
+}
+
+@media screen and (min-width: 971px) {
+    .mobile {
+        display: none;
+    }
+
+    .navbar ul li {
+        display: inline-block;
+        padding: 8px 10px;
+    }
+
+    .navbar ul li a {
+        color: #007bff;
+    }
+
+    .navbar ul li a:hover {
+        color: #115fb3;
+        text-decoration: underline;
+    }
 }
