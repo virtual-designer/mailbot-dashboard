@@ -21,6 +21,12 @@ code {
     background: linear-gradient(to left, rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.2));
 }
 
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media screen and (max-width: 970px) {
     .desktop {
         display: none;
@@ -87,7 +93,7 @@ code {
 
 @media screen and (min-width: 971px) {
     .mobile {
-        display: none;
+        display: none !important;
     }
 
     .navbar ul li {
