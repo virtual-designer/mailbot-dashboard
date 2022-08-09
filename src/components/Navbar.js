@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import Button from './Button';
+import ButtonLink from './ButtonLink';
 import { BiArrowBack, BiMenu } from 'react-icons/bi';
 
 export default class Navbar extends React.Component {
@@ -24,10 +24,11 @@ export default class Navbar extends React.Component {
                     <li className="toggler mobile" onClick={() => this.toggle()}><BiArrowBack className="icon mobile" size="25px" /></li>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
+                    <li className="mobile"><Link to="/">Login</Link></li>
                 </ul>
                 <div className="overlay mobile fixed top-0 left-0 h-[100vh] w-[100vw] z-[3]" onClick={() => this.toggle()}></div>
                 <div className="absolute top-3 right-3 desktop">
-                    <Button>Login</Button>
+                    <ButtonLink to="/">Login</ButtonLink>
                 </div>
             </nav>
         );
