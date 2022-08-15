@@ -1,9 +1,12 @@
+import { useContext } from 'react';
 import MailBotLogo from '../assets/mailbot.png';
 import BottomBar from '../components/BottomBar';
 import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function Home() {
+    const { user } = useContext(AuthContext);
     const footerLinks = [
         {
             url: "https://github.com/virtual-designer/mailbot",
@@ -33,10 +36,14 @@ export default function Home() {
                             <span className='text-xs block'>Source Code</span>
                         </Button>
                         <br className='mobile' />
-                        <ButtonLink className='px-8 py-3 md:ml-5 block md:inline-block text-center' to="/login">
+                        {!user && <ButtonLink className='px-8 py-3 md:ml-5 block md:inline-block text-center' to="/login">
                             <span>Control Panel</span>
                             <span className='text-xs block'>Login</span>
-                        </ButtonLink>
+                        </ButtonLink>}
+                        {user && <ButtonLink className='px-8 py-3 md:ml-5 block md:inline-block text-center' to="/dashboard">
+                            <span>Control Panel</span>
+                            <span className='text-xs block'>Go to control panel</span>
+                        </ButtonLink>}
                     </div>
 
                     <br />

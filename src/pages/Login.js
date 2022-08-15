@@ -1,19 +1,26 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../components/Button';
-import { AuthContext } from '../contexts/AuthContext';
 import useLogin from '../hooks/useLogin';
-import useRequest from '../hooks/useRequest';
-import { MdError } from 'react-icons/md';
+import { MdError, MdInfo } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function Login() {
     const [forgotPassword, setForgotPassword] = useState(false);
-    // const [error, setError] = useState(null);
     const [usernameError, setUsernameError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
-    const authData = useContext(AuthContext);
-    const { error, user, login, inProgress } = useLogin();
+    const { error, login, inProgress } = useLogin();
+    const { user: contextUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (contextUser) {
+            navigate('/dashboard');
+        }
+    }, [contextUser, navigate]);
 
     const handleLogin = async e => {
         e.preventDefault();
@@ -36,6 +43,7 @@ export default function Login() {
                 <form onSubmit={handleLogin} method="post" className='bg-white mt-2 md:m-5 p-4 rounded shadow'>
                     <h1 className="text-3xl md:text-4xl mb-8 text-center w-[75vw] md:w-[14.5vw] mx-0 px-0">Login</h1>
                     {error && <div className="form-group"><div className="bg-red-100 text-red-400 p-3 rounded border border-red-600"><MdError size={20} className='inline-block' /> {error}</div></div>}
+                    {inProgress && <div className="form-group"><div className="bg-blue-100 text-blue-400 p-3 rounded border border-blue-600"><MdInfo size={20} className='inline-block' /> Authenticating...</div></div>}
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input onChange={e => setUsername(e.target.value)} type="text" id="username" name="username" className="form-control w-[75vw] md:w-[14.5vw]" />

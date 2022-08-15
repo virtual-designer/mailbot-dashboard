@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ButtonLink from './ButtonLink';
 import Button from './Button';
 import { BiArrowBack, BiMenu } from 'react-icons/bi';
@@ -11,10 +11,12 @@ export default function Navbar() {
     const toggle = () => setIsOpen(state => !state);
     const { user } = useContext(AuthContext);
     const { error, logout } = useLogout();
+    const navigate = useNavigate();
 
     const handleLogout = async () => {
         await console.log('Done');
         await logout();
+        navigate("/login", { replace: true });
     };
 
     return (
@@ -29,7 +31,8 @@ export default function Navbar() {
                     <li className="toggler mobile" onClick={toggle}><BiArrowBack className="icon mobile" size="25px" /></li>
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
-                    <li className="mobile"><Link to="/login">Login</Link></li>
+                    {user && <li className="mobile"><Link to="/dashboard">Dashboard</Link></li>}
+                    {!user && <li className="mobile"><Link to="/login">Login</Link></li>}
                 </ul>
                 <div className="overlay mobile fixed top-0 left-0 h-[100vh] w-[100vw] z-[3]" onClick={toggle}></div>
                 <div className="absolute top-2 right-3 desktop">
