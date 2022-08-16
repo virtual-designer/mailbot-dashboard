@@ -9,7 +9,7 @@ export default function Dashboard() {
     const { error, inProgress, response, send } = useRequest();
 
     useEffect(() => {
-        send(endpoint('/threads'));
+        send(endpoint('/threads')); 
     }, []);
 
     return (
@@ -23,8 +23,7 @@ export default function Dashboard() {
                     {response && (
                         <>
                             {response.length > 0 ? response.map((thread, index) => (
-                                
-                                <Thread title={thread.user} user={thread.author} createdAt={new Date(thread.createdAt)} key={index} />
+                                <Thread title={thread.user.tag} user={thread.createdBy.tag} createdAt={new Date(thread.createdAt)} key={index} />
                             )) : <div className="text-2xl mx-3">No open thread.</div>}
                         </>
                     )}

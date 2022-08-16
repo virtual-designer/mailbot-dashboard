@@ -13,6 +13,8 @@ export const AuthContextReducer = (state, action) => {
             return { user: action.payload };
         case AuthActions.LOGOUT:
             return { user: null };
+        default: 
+            return state;
     }
 };
 
